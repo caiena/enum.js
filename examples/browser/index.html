@@ -1,0 +1,34 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>playground</title>
+  <meta name="description" content="html5 playground">
+  <meta name="author" content="caiena.net">
+
+  <!-- <link rel="stylesheet" href="css/styles.css?v=1.0"> -->
+
+  <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+  <script src="enum.umd.js"></script>
+  <script>
+      var locales = new Enum({ 'pt-BR': 1, 'en-US': 2 })
+      var content = `
+        all:  ${JSON.stringify(locales.all)}
+        keys: ${locales.keys}
+        values: ${locales.values}
+      `
+
+      var p = document.createElement('p');
+      p.innerHTML = content
+
+      document.body.appendChild(p)
+  </script>
+</body>
+</html>

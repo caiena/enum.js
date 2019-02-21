@@ -1,0 +1,38 @@
+{
+  "name": "@caiena/enum",
+  "version": "0.1.0",
+  "description": "Enum",
+  "main": "dist/enum.cjs.js",
+  "module": "dist/enum.esm.js",
+  "browser": "dist/enum.umd.js",
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/polyfill": "^7.2.5",
+    "@babel/preset-env": "^7.2.3",
+    "@babel/register": "^7.0.0",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "chai-change": "^2.1.2",
+    "chai-datetime": "^1.5.0",
+    "chai-subset": "^1.6.0",
+    "mocha": "^6.0.0",
+    "node-watch": "^0.6.0",
+    "rollup": "^1.0.0",
+    "rollup-plugin-babel": "^4.2.0",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-node-resolve": "^4.0.0"
+  },
+  "scripts": {
+    "prebuild": "rm -rf ./dist/*",
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "pretest": "npm run build",
+    "pretest:all": "npm run build",
+    "test": "mocha --exit",
+    "test:all": "mocha --exit \"test/**/*.spec.js\"",
+    "test:watch": "node ./bin/mocha-watch"
+  },
+  "files": [
+    "dist"
+  ]
+}
