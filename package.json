@@ -34,5 +34,8 @@
   },
   "files": [
     "dist"
-  ]
+  ],
+  "dependencies": {
+    "@caiena/lodash-ext": "^0.4.0"
+  }
 }
