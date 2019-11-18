@@ -5,22 +5,30 @@
   "main": "dist/enum.cjs.js",
   "module": "dist/enum.esm.js",
   "browser": "dist/enum.umd.js",
+  "dependencies": {
+    "core-js": "3.4.1"
+  },
   "devDependencies": {
     "@babel/core": "^7.2.2",
-    "@babel/polyfill": "^7.2.5",
-    "@babel/preset-env": "^7.2.3",
-    "@babel/register": "^7.0.0",
+    "@babel/polyfill": "^7.7.0",
+    "@babel/preset-env": "^7.7.1",
+    "@babel/register": "^7.7.0",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "chai-change": "^2.1.2",
     "chai-datetime": "^1.5.0",
     "chai-subset": "^1.6.0",
-    "mocha": "^6.0.0",
-    "node-watch": "^0.6.0",
-    "rollup": "^1.0.0",
+    "glob": "^7.1.6",
+    "mocha": "^6.2.2",
+    "node-watch": "^0.6.3",
+    "pryjs": "^1.0.3",
+    "rollup": "^1.27.2",
     "rollup-plugin-babel": "^4.2.0",
-    "rollup-plugin-commonjs": "^9.2.0",
-    "rollup-plugin-node-resolve": "^4.0.0"
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-glob-import": "^0.4.5",
+    "rollup-plugin-local-resolve": "^1.0.7",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "sinon": "^7.5.0"
   },
   "scripts": {
     "prebuild": "rm -rf ./dist/*",
@@ -34,8 +42,5 @@
   },
   "files": [
     "dist"
-  ],
-  "dependencies": {
-    "@caiena/lodash-ext": "^0.4.0"
-  }
+  ]
 }
