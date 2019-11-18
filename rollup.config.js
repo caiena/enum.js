@@ -1,10 +1,10 @@
-import resolve from 'rollup-plugin-node-resolve'
 import commonjs from 'rollup-plugin-commonjs'
+import resolve from 'rollup-plugin-node-resolve'
+import localResolve from 'rollup-plugin-local-resolve'
 import babel from 'rollup-plugin-babel'
 import pkg from './package.json'
 
 export default [
-  // browser-friendly UMD build
   {
     input: 'src/index.js',
     output: {
@@ -13,33 +13,49 @@ export default [
       format: 'umd'
     },
     plugins: [
-      resolve(), // so Rollup can find dependency libraries (e.g. `lodash`)
-      commonjs(), // so Rollup can convert dependency libraries (e.g. `lodash`) to an ES module
+      resolve(),  // so Rollup can find dependencies like `lodash` or `core-js`
+      commonjs(), // so Rollup can transform dependencies in CommonJS to ESM
       babel({
         exclude: ['node_modules/**']
       })
     ]
   },
 
-  // CommonJS (for Node) and ES module (for bundlers) build.
-  // (We could have three entries in the configuration array
-  // instead of two, but it's quicker to generate multiple
-  // builds from a single configuration where possible, using
-  // an array for the `output` option, where we can specify
-  // `file` and `format` for each target)
+  // CommonJS (for Node 8+)
   {
     input: 'src/index.js',
-    // NOTE: use it if you have a "user provided" dependency. It means user will have to:
-    // - yarn add your-library lodash    # <= note that lodash must be installed to.
-    // external: ['lodash'],
-    output: [
-      { file: pkg.main,   format: 'cjs' },
-      { file: pkg.module, format: 'es' }
-    ],
+    output: {
+      file: pkg.main,
+      format: 'cjs'
+    },
     plugins: [
+      localResolve(),
+      babel({
+        exclude: ['node_modules/**'],
+        presets: [[
+          "@babel/preset-env", {
+            targets: {
+              node: "8"
+            }
+          }
+        ]]
+      }),
+    ]
+  },
+
+  // and ES module (for bundlers) build.
+  {
+    input: 'src/index.js',
+    output: {
+      file: pkg.module,
+      format: 'esm'
+    },
+    plugins: [
+      commonjs(),
+      localResolve(),
       babel({
         exclude: ['node_modules/**']
-      })
+      }),
     ]
-  }
+  },
 ]

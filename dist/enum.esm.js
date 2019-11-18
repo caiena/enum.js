@@ -1,8 +1,9 @@
-import 'core-js/modules/es7.object.values';
-import 'core-js/modules/web.dom.iterable';
-import 'core-js/modules/es6.array.iterator';
-import 'core-js/modules/es6.object.keys';
-import 'core-js/modules/es6.object.freeze';
+import 'core-js/modules/es.array.iterator';
+import 'core-js/modules/es.object.freeze';
+import 'core-js/modules/es.object.keys';
+import 'core-js/modules/es.object.to-string';
+import 'core-js/modules/es.object.values';
+import 'core-js/modules/web.dom-collections.iterator';
 
 function _classCallCheck(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
