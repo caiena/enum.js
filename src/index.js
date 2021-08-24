@@ -1,4 +1,4 @@
 import Enum from './enum'
 
 
-export default Enum
+export { Enum }

@@ -1,8 +1,17 @@
-import commonjs from 'rollup-plugin-commonjs'
-import resolve from 'rollup-plugin-node-resolve'
-import localResolve from 'rollup-plugin-local-resolve'
-import babel from 'rollup-plugin-babel'
+import nodeResolve from "@rollup/plugin-node-resolve"
+import commonjs    from "@rollup/plugin-commonjs"
+import babel       from "@rollup/plugin-babel"
+
 import pkg from './package.json'
+
+const plugins = [
+  babel({
+    babelHelpers: "bundled",
+    exclude:      ["node_modules/**"]
+  }),
+  nodeResolve(),
+  commonjs()
+]
 
 export default [
   {
@@ -12,50 +21,18 @@ export default [
       file: pkg.browser,
       format: 'umd'
     },
-    plugins: [
-      resolve(),  // so Rollup can find dependencies like `lodash` or `core-js`
-      commonjs(), // so Rollup can transform dependencies in CommonJS to ESM
-      babel({
-        exclude: ['node_modules/**']
-      })
-    ]
+    // external: [],
+    plugins
   },
 
-  // CommonJS (for Node 8+)
+  // CommonJS (for Node) and ES module (for bundlers) build
   {
-    input: 'src/index.js',
-    output: {
-      file: pkg.main,
-      format: 'cjs'
-    },
-    plugins: [
-      localResolve(),
-      babel({
-        exclude: ['node_modules/**'],
-        presets: [[
-          "@babel/preset-env", {
-            targets: {
-              node: "8"
-            }
-          }
-        ]]
-      }),
-    ]
-  },
-
-  // and ES module (for bundlers) build.
-  {
-    input: 'src/index.js',
-    output: {
-      file: pkg.module,
-      format: 'esm'
-    },
-    plugins: [
-      commonjs(),
-      localResolve(),
-      babel({
-        exclude: ['node_modules/**']
-      }),
-    ]
+    input: "src/index.js",
+    output: [
+      { file: pkg.main,   format: "cjs", sourcemap: true },
+      { file: pkg.module, format: "es",  sourcemap: true }
+    ],
+    // external: [],
+    plugins
   },
 ]

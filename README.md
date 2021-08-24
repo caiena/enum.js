@@ -1,2 +1,3 @@
 # Enum.js
+
 Enumerations

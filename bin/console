@@ -35,6 +35,7 @@ let r = repl.start({
 })
 
 // requiring itself
-r.context.Enum = require('../dist/enum.cjs.js')
+let { Enum } = require('../dist/enum.cjs.js')
+r.context.Enum = Enum
 
 // add your dependencies here as you wish..
