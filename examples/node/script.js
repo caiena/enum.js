@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const path = require('path');
+const path = require('path')
 const distDir = path.join(__dirname, '..', '..', 'dist')
 
 const Enum = require(path.join(distDir, 'enum.cjs.js'))
