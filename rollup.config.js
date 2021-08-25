@@ -29,7 +29,8 @@ export default [
   {
     input: "src/index.js",
     output: [
-      { file: pkg.main,   format: "cjs", sourcemap: true },
+      // XXX: exports: "default" pois exportamos apenas o default no entrypoint (src/index.js)!
+      { file: pkg.main,   format: "cjs", sourcemap: true, exports: "default" },
       { file: pkg.module, format: "es",  sourcemap: true }
     ],
     // external: [],

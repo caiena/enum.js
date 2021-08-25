@@ -1,7 +1,5 @@
 'use strict';
 
-Object.defineProperty(exports, '__esModule', { value: true });
-
 function _classCallCheck(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
@@ -1217,5 +1215,5 @@ var Enum = /*#__PURE__*/function () {
       return this._data[key];
     } }]);return Enum;}();
 
-exports.Enum = Enum;
+module.exports = Enum;
 //# sourceMappingURL=enum.cjs.js.map

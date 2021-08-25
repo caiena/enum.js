@@ -1213,5 +1213,5 @@ var Enum = /*#__PURE__*/function () {
       return this._data[key];
     } }]);return Enum;}();
 
-export { Enum };
+export { Enum as default };
 //# sourceMappingURL=enum.esm.js.map
