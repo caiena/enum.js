@@ -1435,3 +1435,4 @@
   return Enum;
 
 })));
+//# sourceMappingURL=enum.umd.js.map

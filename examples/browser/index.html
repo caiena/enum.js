@@ -18,17 +18,17 @@
 <body>
   <script src="enum.umd.js"></script>
   <script>
-      var locales = new Enum({ 'pt-BR': 1, 'en-US': 2 })
+      var locales = new Enum({ "pt-BR": 1, "en-US": 2 })
       var content = `
         all:  ${JSON.stringify(locales.all)}
         keys: ${locales.keys}
         values: ${locales.values}
       `
 
-      var p = document.createElement('p');
-      p.innerHTML = content
+      var pre = document.createElement("pre");
+      pre.innerHTML = content
 
-      document.body.appendChild(p)
+      document.body.appendChild(pre)
   </script>
 </body>
 </html>

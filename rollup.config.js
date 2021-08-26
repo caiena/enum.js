@@ -8,7 +8,7 @@ import babel       from "@rollup/plugin-babel"
 // import glob from "rollup-plugin-glob-import"
 import { terser }   from "rollup-plugin-terser"
 
-import pkg from './package.json'
+import pkg from "./package.json"
 
 const plugins = [
   nodeResolve(),
@@ -22,21 +22,23 @@ const plugins = [
 export default [
   // browser-friendly UMD build, all packed (no external dependency)
   {
-    input: 'src/index.js',
+    input: "src/index.js",
     output: {
-      name: 'Enum',
+      name: "Enum",
       file: pkg.browser,
-      format: 'umd'
+      format: "umd",
+      sourcemap: true
     },
     // external: [],
     plugins
   },
   { // minified UMD build!
-    input: 'src/index.js',
+    input: "src/index.js",
     output: {
-      name: 'Enum',
-      file: pkg.browser.replace('.js', '.min.js'),
-      format: 'umd'
+      name: "Enum",
+      file: pkg.browser.replace(".js", ".min.js"),
+      format: "umd",
+      sourcemap: true
     },
     // external: [],
     plugins: [
