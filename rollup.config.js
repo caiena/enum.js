@@ -1,61 +1,61 @@
-import commonjs from 'rollup-plugin-commonjs'
-import resolve from 'rollup-plugin-node-resolve'
-import localResolve from 'rollup-plugin-local-resolve'
-import babel from 'rollup-plugin-babel'
-import pkg from './package.json'
+import nodeResolve from "@rollup/plugin-node-resolve"
+import commonjs    from "@rollup/plugin-commonjs"
+import babel       from "@rollup/plugin-babel"
+// import alias       from "@rollup/plugin-alias"
+// import json        from "@rollup/plugin-json"
+// import yaml        from "@rollup/plugin-yaml"
+
+// import glob from "rollup-plugin-glob-import"
+import { terser }   from "rollup-plugin-terser"
+
+import pkg from "./package.json"
+
+const plugins = [
+  nodeResolve(),
+  commonjs(),
+  babel({
+    babelHelpers: "bundled",
+    exclude:      ["node_modules/**"]
+  })
+]
 
 export default [
+  // browser-friendly UMD build, all packed (no external dependency)
   {
-    input: 'src/index.js',
+    input: "src/index.js",
     output: {
-      name: 'Enum',
+      name: "Enum",
       file: pkg.browser,
-      format: 'umd'
+      format: "umd",
+      sourcemap: true
     },
+    // external: [],
+    plugins
+  },
+  { // minified UMD build!
+    input: "src/index.js",
+    output: {
+      name: "Enum",
+      file: pkg.browser.replace(".js", ".min.js"),
+      format: "umd",
+      sourcemap: true
+    },
+    // external: [],
     plugins: [
-      resolve(),  // so Rollup can find dependencies like `lodash` or `core-js`
-      commonjs(), // so Rollup can transform dependencies in CommonJS to ESM
-      babel({
-        exclude: ['node_modules/**']
-      })
+      ...plugins,
+      terser() // minify js
     ]
   },
 
-  // CommonJS (for Node 8+)
+  // CommonJS (for Node) and ES module (for bundlers) build
   {
-    input: 'src/index.js',
-    output: {
-      file: pkg.main,
-      format: 'cjs'
-    },
-    plugins: [
-      localResolve(),
-      babel({
-        exclude: ['node_modules/**'],
-        presets: [[
-          "@babel/preset-env", {
-            targets: {
-              node: "8"
-            }
-          }
-        ]]
-      }),
-    ]
-  },
-
-  // and ES module (for bundlers) build.
-  {
-    input: 'src/index.js',
-    output: {
-      file: pkg.module,
-      format: 'esm'
-    },
-    plugins: [
-      commonjs(),
-      localResolve(),
-      babel({
-        exclude: ['node_modules/**']
-      }),
-    ]
+    input: "src/index.js",
+    output: [
+      // XXX: exports: "default" pois exportamos apenas o default no entrypoint (src/index.js)!
+      { file: pkg.main,   format: "cjs", sourcemap: true, exports: "default" },
+      { file: pkg.module, format: "es",  sourcemap: true }
+    ],
+    // external: [],
+    plugins
   },
 ]
