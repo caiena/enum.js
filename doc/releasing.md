@@ -1,13 +1,29 @@
 # Releasing
 
+## setup
+
+- `npm install -g npm@9.1.2`
+- `npm install`
+- `npm run build`
+- `npm run test`
+
+
 ## pre-testing
-- `yarn run build`
+
+- `npm run build`
 - `bin/console`
   - enter the node REPL and interact with `Enum`, which is available globally
   - sample: `(new Enum({ one: 1, two: 2 })).keys` should output `['one', 'two']`
 
 
 ## publishing
+
+- edit `package.json`, bumping version
+- `git commit -m "v1.2.3"`
+- `npm publish --access=public`
+
+
+_old yarn instructions:_
 - IMPORTANT: do not edit `package.json` file, bumping `version` key, because `yarn publish` will already do that
   - it updates package.json version
   - creates a new git commit with the specified version as the message

@@ -1,6 +1,6 @@
 {
   "name": "@caiena/enum",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Enum",
   "main": "dist/enum.cjs.js",
   "module": "dist/enum.esm.js",
@@ -19,8 +19,6 @@
   "files": [
     "dist"
   ],
-  "dependencies": {},
-  "peerDependencies": {},
   "devDependencies": {
     "@babel/core": "^7.12.3",
     "@babel/preset-env": "^7.12.1",
@@ -42,8 +40,7 @@
     "eslint": "^7.12.1",
     "glob": "^7.1.6",
     "js-yaml": "^3.12.2",
-    "mocha": "^8.2.0",
-    "pryjs": "^1.0.3",
+    "mocha": "^10.1.0",
     "rollup": "^2.32.1",
     "rollup-plugin-copy-assets": "^2.0.1",
     "rollup-plugin-css-only": "^2.1.0",
